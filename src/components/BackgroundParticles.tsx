@@ -3,10 +3,11 @@
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+import type { Engine } from "tsparticles-engine"; // ✅ Correct type
 
 export default function BackgroundParticles() {
-  const particlesInit = useCallback(async (engine: any) => {
-    await loadSlim(engine);
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadSlim(engine); // ✅ Slim engine for better performance
   }, []);
 
   return (
@@ -14,13 +15,31 @@ export default function BackgroundParticles() {
       className="absolute inset-0 z-[1] w-full h-full pointer-events-none"
       init={particlesInit}
       options={{
-        background: { color: "purple" },
+        background: {
+          color: "purple",
+        },
         particles: {
-          number: { value: 60, density: { enable: true, value_area: 800 } },
-          color: { value: "#b94fff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.4, random: true },
-          size: { value: { min: 1, max: 5 }, random: true },
+          number: {
+            value: 60,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: "#b94fff",
+          },
+          shape: {
+            type: "circle",
+          },
+          opacity: {
+            value: 0.4,
+            random: true,
+          },
+          size: {
+            value: { min: 1, max: 5 },
+            random: true,
+          },
           move: {
             enable: true,
             speed: 1.2,
@@ -38,12 +57,23 @@ export default function BackgroundParticles() {
         },
         interactivity: {
           events: {
-            onHover: { enable: true, mode: "repulse" },
-            onClick: { enable: true, mode: "push" },
+            onHover: {
+              enable: true,
+              mode: "repulse",
+            },
+            onClick: {
+              enable: true,
+              mode: "push",
+            },
           },
           modes: {
-            repulse: { distance: 100, duration: 0.4 },
-            push: { quantity: 4 },
+            repulse: {
+              distance: 100,
+              duration: 0.4,
+            },
+            push: {
+              quantity: 4,
+            },
           },
         },
         retina_detect: true,

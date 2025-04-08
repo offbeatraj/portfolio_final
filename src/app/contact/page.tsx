@@ -8,11 +8,12 @@ import { useEffect, useState } from "react";
 
 export default function ContactPage() {
   const [displayText, setDisplayText] = useState("");
-  const fullTexts = ["You know the business", "I know the code"];
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
 
   useEffect(() => {
+    const fullTexts = ["You know the business", "I know the code"];
+
     const handleTyping = () => {
       const fullText = fullTexts[loopNum % fullTexts.length];
       const updatedText = isDeleting
@@ -31,7 +32,7 @@ export default function ContactPage() {
 
     const typingTimer = setTimeout(handleTyping, isDeleting ? 40 : 90);
     return () => clearTimeout(typingTimer);
-  }, [displayText, isDeleting, loopNum]);
+  }, [displayText, isDeleting, loopNum]); // ✅ `fullTexts` removed from dependencies
 
   return (
     <main className="relative w-full min-h-screen bg-black text-white overflow-hidden">
@@ -44,19 +45,24 @@ export default function ContactPage() {
         {/* 🌍 COLLABORATE SECTION */}
         <section className="relative z-10">
           <h2 className="text-center text-4xl md:text-5xl font-bold mb-2 text-purple-400 tracking-wide">
-            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2 }}
+            >
               COLLABORATE
             </motion.span>
           </h2>
           <p className="text-center text-lg text-white/80 mb-12">
             Let&apos;s craft{" "}
-            <motion.span
-              className="text-purple-400 font-semibold"
-              animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              magic ✨
-            </motion.span>
+            <span className="text-purple-400 font-semibold">
+              <motion.span
+                animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                magic ✨
+              </motion.span>
+            </span>
             , together.
           </p>
 
@@ -68,7 +74,7 @@ export default function ContactPage() {
               <p className="text-white/70 text-sm">Backed by credible mentors and industry pros.</p>
             </div>
 
-            {/* Tile 2 with working Spline */}
+            {/* Tile 2 */}
             <div className="relative bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md shadow-xl p-6 overflow-hidden h-[280px]">
               <h3 className="font-bold text-lg text-white mb-2 z-10 relative">🌐 Open to Work</h3>
               <p className="text-white/70 text-sm z-10 relative">Available globally (except Antarctica 🐧).</p>

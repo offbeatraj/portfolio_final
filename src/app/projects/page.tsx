@@ -63,7 +63,7 @@ export default function ProjectsPage() {
   return (
     <section className="relative min-h-screen w-full bg-black text-white overflow-hidden">
       {/* 🌌 Spline Background */}
-      <div className="absolute top-[-0px] left-0 w-full h-[1400px] z-0 opacity-70 pointer-events-none">
+      <div className="absolute top-0 left-0 w-full h-[1400px] z-0 opacity-70 pointer-events-none">
         <Spline scene="https://prod.spline.design/l0wJDIwD-UO6Fdke/scene.splinecode" />
       </div>
 
@@ -77,9 +77,8 @@ export default function ProjectsPage() {
           Crafting Digital Realities
         </h2>
 
-        {/* 🔁 Rotating Project Showcase */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-          {/* Left: Image Card */}
+          {/* Left Image */}
           <motion.div
             key={currentProject.name}
             className="w-full md:w-1/2 bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-md shadow-xl"
@@ -96,7 +95,7 @@ export default function ProjectsPage() {
             />
           </motion.div>
 
-          {/* Right: Description + Tech + GitHub */}
+          {/* Right Description */}
           <motion.div
             key={currentProject.github}
             className="w-full md:w-1/2"
@@ -108,7 +107,6 @@ export default function ProjectsPage() {
               {currentProject.name}
             </h3>
             <p className="text-white/80 mb-4">{currentProject.desc}</p>
-
             <div className="flex flex-wrap gap-2 mb-4">
               {currentProject.tech.map((tech, i) => (
                 <span
@@ -119,7 +117,6 @@ export default function ProjectsPage() {
                 </span>
               ))}
             </div>
-
             <a
               href={currentProject.github}
               target="_blank"
@@ -132,7 +129,7 @@ export default function ProjectsPage() {
           </motion.div>
         </div>
 
-        {/* ✨ CODE COMPARISON SLIDER */}
+        {/* CODE COMPARISON SLIDER */}
         <div className="mt-24">
           <motion.h3
             className="text-3xl font-bold text-center mb-4"
@@ -142,6 +139,7 @@ export default function ProjectsPage() {
           >
             CODE MATTERS
           </motion.h3>
+
           <p className="text-white/60 text-center mb-6">
             From Chaos to Clarity : Say Goodbye to the Un’s
           </p>
@@ -167,18 +165,20 @@ export default function ProjectsPage() {
                 pointerEvents: "none",
               }}
               handle={
-                <motion.div
-                  className="w-[2px] h-full bg-gradient-to-b from-purple-400 to-purple-700 shadow-[0_0_20px_rgba(168,85,247,0.9)]"
-                  animate={{
-                    x: ["0%", "100%", "0%"],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 4,
-                    ease: "easeInOut",
-                  }}
-                />
+                <div className="w-[2px] h-full overflow-hidden">
+                  <motion.div
+                    className="w-full h-full bg-gradient-to-b from-purple-400 to-purple-700 shadow-[0_0_20px_rgba(168,85,247,0.9)]"
+                    animate={{
+                      x: ["0%", "100%", "0%"],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      duration: 4,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </div>
               }
             />
           </div>

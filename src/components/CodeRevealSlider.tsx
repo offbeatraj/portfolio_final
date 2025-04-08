@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import "./codereveal.css"; // custom styles here
+import "./codereveal.css";
 
 export default function CodeRevealSlider() {
   const [hovered, setHovered] = useState(false);
@@ -28,7 +28,7 @@ export default function CodeRevealSlider() {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        but I bet you won't have to, once you hire me!
+        but I bet you won&apos;t have to, once you hire me!
       </motion.p>
 
       <div className="relative text-4xl md:text-6xl font-extrabold text-white/70 cursor-pointer transition duration-500 ease-in-out">
@@ -37,7 +37,7 @@ export default function CodeRevealSlider() {
           <span className="reveal-text-alt">I know the code</span>
         </span>
 
-        {/* 💫 Particle Glow */}
+        {/* ✨ Glow Overlay */}
         <div className="absolute inset-0 pointer-events-none z-0 sparkle-layer" />
       </div>
     </div>
