@@ -1,0 +1,26 @@
+.glow-line-wrapper {
+  width: 4px;
+  height: 100%;
+  background: none;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glow-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #b47bff, #8f00ff);
+  box-shadow: 0 0 12px 4px rgba(191, 108, 255, 0.8);
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px 2px rgba(191, 108, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 18px 8px rgba(191, 108, 255, 1);
+  }
+}
