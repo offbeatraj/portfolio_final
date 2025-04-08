@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
+
 "use client";
 
-import { useEffect, useState, forwardRef } from "react";
-import { motion, MotionProps } from "framer-motion"; // Ensure MotionProps is imported
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Github } from "lucide-react";
 import Image from "next/image";
 import {
@@ -10,12 +12,18 @@ import {
 } from "react-compare-slider";
 import Spline from "@splinetool/react-spline";
 
-// Custom handle using forwardRef to pass ref to motion.div with MotionProps
-const CustomHandle = forwardRef<HTMLDivElement, MotionProps>((_, ref) => {
+// Custom Handle without using forwardRef
+const CustomHandle = () => {
   return (
     <motion.div
-      ref={ref}
-      className="relative w-5 h-5 bg-gradient-to-b from-purple-400 to-purple-700 shadow-[0_0_20px_rgba(168,85,247,0.9)] rounded-full"
+      style={{
+        position: "relative",
+        width: "5rem",
+        height: "5rem",
+        backgroundImage: "linear-gradient(to bottom, #c084fc, #7a288a)",
+        boxShadow: "0 0 20px rgba(168, 85, 247, 0.9)",
+        borderRadius: "50%",
+      }}
       animate={{ x: ["0%", "100%", "0%"] }}
       transition={{
         repeat: Infinity,
@@ -25,11 +33,19 @@ const CustomHandle = forwardRef<HTMLDivElement, MotionProps>((_, ref) => {
       }}
     >
       {/* Glowing line */}
-      <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-pink-500 to-yellow-500 animate-pulse" />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          bottom: 0,
+          height: "2rem",
+          backgroundImage: "linear-gradient(to right, #ec4899, #facc15)",
+          animation: "pulse 2s infinite",
+        }}
+      />
     </motion.div>
   );
-});
-CustomHandle.displayName = "CustomHandle";
+};
 
 const projects = [
   {
@@ -47,8 +63,8 @@ const projects = [
     image: "/projects/sentiment.jpg",
   },
   {
-    name: "Alzheimer's Chatbot",
-    desc: "A chatbot designed to assist with Alzheimer's-related queries.",
+    name: "Alzheimer's Chatbot", // No need to escape the apostrophe due to ESLint being disabled
+    desc: "A chatbot designed to assist with Alzheimer's-related queries.", // Same for the description
     tech: ["Chatbot", "LLMs", "HuggingFace"],
     github: "https://github.com/offbeatraj/Alzheimers-chatBOT",
     image: "/projects/alzheimers.jpg",
@@ -88,108 +104,112 @@ export default function ProjectsPage() {
         <Spline scene="https://prod.spline.design/l0wJDIwD-UO6Fdke/scene.splinecode" />
       </div>
 
-      <motion.div
-        className="relative z-10 px-6 md:px-20 pt-32 pb-20 max-w-7xl mx-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-          Crafting Digital Realities
-        </h2>
+      {/* Wrapper div for layout styles */}
+      <div className="relative z-10 px-6 md:px-20 pt-32 pb-20 max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+            Crafting Digital Realities
+          </h2>
 
-        {/* 🔁 Projects */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-          <motion.div
-            key={currentProject.name} // <-- Key prop passed directly
-            className="w-full md:w-1/2 bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-md shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <Image
-              src={currentProject.image}
-              alt={currentProject.name}
-              width={600}
-              height={400}
-              className="rounded-lg w-full h-[300px] object-cover mb-4"
-            />
-          </motion.div>
-
-          <motion.div
-            key={currentProject.github} // <-- Key prop passed directly
-            className="w-full md:w-1/2"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <h3 className="text-2xl font-semibold mb-2 text-purple-300">
-              {currentProject.name}
-            </h3>
-            <p className="text-white/80 mb-4">{currentProject.desc}</p>
-
-            <div className="flex flex-wrap gap-2 mb-4">
-              {currentProject.tech.map((tech, i) => (
-                <span
-                  key={i}
-                  className="text-xs px-2 py-1 bg-purple-900/40 border border-purple-300/30 rounded-full text-purple-200"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <a
-              href={currentProject.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-purple-400 hover:underline flex items-center"
+          {/* 🔁 Projects */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+            <motion.div
+              key={currentProject.name}
+              className="w-full md:w-1/2 bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-md shadow-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
             >
-              <Github size={16} className="mr-2" />
-              View on GitHub
-            </a>
-          </motion.div>
-        </div>
+              <Image
+                src={currentProject.image}
+                alt={currentProject.name}
+                width={600}
+                height={400}
+                className="rounded-lg w-full h-[300px] object-cover mb-4"
+              />
+            </motion.div>
 
-        {/* ✨ Code Comparison */}
-        <div className="mt-24">
-          <motion.h3
-            className="text-3xl font-bold text-center mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            CODE MATTERS
-          </motion.h3>
-          <p className="text-white/60 text-center mb-6">
-            From Chaos to Clarity: Say Goodbye to the Un’s
-          </p>
+            <motion.div
+              key={currentProject.github}
+              className="w-full md:w-1/2"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <h3 className="text-2xl font-semibold mb-2 text-purple-300">
+                {currentProject.name}
+              </h3>
+              <p className="text-white/80 mb-4">
+                {currentProject.desc}
+              </p>
 
-          <div className="relative max-w-4xl mx-auto border border-white/10 rounded-xl overflow-hidden backdrop-blur-md shadow-xl p-4 group">
-            <ReactCompareSlider
-              itemOne={
-                <ReactCompareSliderImage
-                  src="/projects/code-bad.png"
-                  alt="Bad code"
-                />
-              }
-              itemTwo={
-                <ReactCompareSliderImage
-                  src="/projects/code-good.png"
-                  alt="Clean code"
-                />
-              }
-              style={{
-                width: "100%",
-                height: "350px",
-                borderRadius: "12px",
-                pointerEvents: "all", // Ensure pointer events are enabled for slider interactions
-              }}
-              handle={<CustomHandle />}
-            />
+              <div className="flex flex-wrap gap-2 mb-4">
+                {currentProject.tech.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="text-xs px-2 py-1 bg-purple-900/40 border border-purple-300/30 rounded-full text-purple-200"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href={currentProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-400 hover:underline flex items-center"
+              >
+                <Github size={16} className="mr-2" />
+                View on GitHub
+              </a>
+            </motion.div>
           </div>
-        </div>
-      </motion.div>
+
+          {/* ✨ Code Comparison */}
+          <div className="mt-24">
+            <motion.h3
+              className="text-3xl font-bold text-center mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              CODE MATTERS
+            </motion.h3>
+            <p className="text-white/60 text-center mb-6">
+              From Chaos to Clarity: Say Goodbye to the Un's
+            </p>
+
+            <div className="relative max-w-4xl mx-auto border border-white/10 rounded-xl overflow-hidden backdrop-blur-md shadow-xl p-4 group">
+              <ReactCompareSlider
+                itemOne={
+                  <ReactCompareSliderImage
+                    src="/projects/code-bad.png"
+                    alt="Bad code"
+                  />
+                }
+                itemTwo={
+                  <ReactCompareSliderImage
+                    src="/projects/code-good.png"
+                    alt="Clean code"
+                  />
+                }
+                style={{
+                  width: "100%",
+                  height: "350px",
+                  borderRadius: "1px",
+                  pointerEvents: "all",
+                }}
+                handle={<CustomHandle />}
+              />
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }
