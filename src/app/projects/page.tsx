@@ -1,4 +1,3 @@
-// app/projects/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -46,37 +45,6 @@ const projects = [
     tech: ["Recommender", "Pandas", "Python"],
     github: "https://github.com/offbeatraj/movie-recommendation",
     image: "/projects/MovieRecomendation.jpg",
-  },
-];
-
-const blogs = [
-  {
-    title: "Getting Started with React in 2025",
-    date: "March 25, 2025",
-    read: "12 min read",
-    desc: "Learn how to set up and build your first React app with modern practices.",
-    tags: ["React", "JavaScript", "Web Development"],
-  },
-  {
-    title: "The Future of Artificial Intelligence",
-    date: "April 2, 2025",
-    read: "15 min read",
-    desc: "Exploring the latest advancements in AI and their global implications.",
-    tags: ["Artificial Intelligence", "Technology", "Future"],
-  },
-  {
-    title: "Sustainable Web Development Practices",
-    date: "March 15, 2025",
-    read: "18 min read",
-    desc: "Build web apps that are efficient and environmentally conscious.",
-    tags: ["Web Development", "Sustainability", "Performance"],
-  },
-  {
-    title: "Modern JavaScript: Features You Should Know in 2025",
-    date: "April 5, 2025",
-    read: "20 min read",
-    desc: "A guide to the new JS features that help write cleaner, faster code.",
-    tags: ["JavaScript", "Web Development", "Programming"],
   },
 ];
 
@@ -213,40 +181,6 @@ export default function ProjectsPage() {
                 />
               }
             />
-          </div>
-        </div>
-
-        {/* 📰 BLOG SECTION */}
-        <div className="mt-32">
-          <h3 className="text-4xl font-bold text-center mb-10 text-purple-300">
-            Blog Highlights
-          </h3>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog, i) => (
-              <motion.div
-                key={i}
-                className="bg-white/5 border border-white/10 p-5 rounded-xl shadow-xl backdrop-blur-md hover:scale-[1.02] transition duration-300"
-              >
-                <div className="text-sm text-white/60 mb-2">
-                  {blog.date} • {blog.read}
-                </div>
-                <h4 className="font-semibold text-lg text-white mb-2">
-                  {blog.title}
-                </h4>
-                <p className="text-white/70 text-sm mb-3">{blog.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {blog.tags.map((tag, j) => (
-                    <span
-                      key={j}
-                      className="text-xs px-2 py-1 bg-purple-800/30 border border-purple-500/20 rounded-full text-purple-200"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </motion.div>
