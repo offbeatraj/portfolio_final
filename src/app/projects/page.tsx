@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, forwardRef } from "react";
+import { motion, MotionProps } from "framer-motion"; // Ensure MotionProps is imported
 import { Github } from "lucide-react";
 import Image from "next/image";
 import {
@@ -9,6 +9,27 @@ import {
   ReactCompareSliderImage,
 } from "react-compare-slider";
 import Spline from "@splinetool/react-spline";
+
+// Custom handle using forwardRef to pass ref to motion.div with MotionProps
+const CustomHandle = forwardRef<HTMLDivElement, MotionProps>((_, ref) => {
+  return (
+    <motion.div
+      ref={ref}
+      className="relative w-5 h-5 bg-gradient-to-b from-purple-400 to-purple-700 shadow-[0_0_20px_rgba(168,85,247,0.9)] rounded-full"
+      animate={{ x: ["0%", "100%", "0%"] }}
+      transition={{
+        repeat: Infinity,
+        repeatType: "loop",
+        duration: 4,
+        ease: "easeInOut",
+      }}
+    >
+      {/* Glowing line */}
+      <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-pink-500 to-yellow-500 animate-pulse" />
+    </motion.div>
+  );
+});
+CustomHandle.displayName = "CustomHandle";
 
 const projects = [
   {
@@ -62,7 +83,7 @@ export default function ProjectsPage() {
 
   return (
     <section className="relative min-h-screen w-full bg-black text-white overflow-hidden">
-      {/* 🌌 Spline Background */}
+      {/* 🌌 Background */}
       <div className="absolute top-0 left-0 w-full h-[1400px] z-0 opacity-70 pointer-events-none">
         <Spline scene="https://prod.spline.design/l0wJDIwD-UO6Fdke/scene.splinecode" />
       </div>
@@ -77,10 +98,10 @@ export default function ProjectsPage() {
           Crafting Digital Realities
         </h2>
 
+        {/* 🔁 Projects */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-          {/* Left Image */}
           <motion.div
-            key={currentProject.name}
+            key={currentProject.name} // <-- Key prop passed directly
             className="w-full md:w-1/2 bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-md shadow-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,9 +116,8 @@ export default function ProjectsPage() {
             />
           </motion.div>
 
-          {/* Right Description */}
           <motion.div
-            key={currentProject.github}
+            key={currentProject.github} // <-- Key prop passed directly
             className="w-full md:w-1/2"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -107,6 +127,7 @@ export default function ProjectsPage() {
               {currentProject.name}
             </h3>
             <p className="text-white/80 mb-4">{currentProject.desc}</p>
+
             <div className="flex flex-wrap gap-2 mb-4">
               {currentProject.tech.map((tech, i) => (
                 <span
@@ -117,6 +138,7 @@ export default function ProjectsPage() {
                 </span>
               ))}
             </div>
+
             <a
               href={currentProject.github}
               target="_blank"
@@ -129,7 +151,7 @@ export default function ProjectsPage() {
           </motion.div>
         </div>
 
-        {/* CODE COMPARISON SLIDER */}
+        {/* ✨ Code Comparison */}
         <div className="mt-24">
           <motion.h3
             className="text-3xl font-bold text-center mb-4"
@@ -139,9 +161,8 @@ export default function ProjectsPage() {
           >
             CODE MATTERS
           </motion.h3>
-
           <p className="text-white/60 text-center mb-6">
-            From Chaos to Clarity : Say Goodbye to the Un’s
+            From Chaos to Clarity: Say Goodbye to the Un’s
           </p>
 
           <div className="relative max-w-4xl mx-auto border border-white/10 rounded-xl overflow-hidden backdrop-blur-md shadow-xl p-4 group">
@@ -162,24 +183,9 @@ export default function ProjectsPage() {
                 width: "100%",
                 height: "350px",
                 borderRadius: "12px",
-                pointerEvents: "none",
+                pointerEvents: "all", // Ensure pointer events are enabled for slider interactions
               }}
-              handle={
-                <div className="w-[2px] h-full overflow-hidden">
-                  <motion.div
-                    className="w-full h-full bg-gradient-to-b from-purple-400 to-purple-700 shadow-[0_0_20px_rgba(168,85,247,0.9)]"
-                    animate={{
-                      x: ["0%", "100%", "0%"],
-                    }}
-                    transition={{
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      duration: 4,
-                      ease: "easeInOut",
-                    }}
-                  />
-                </div>
-              }
+              handle={<CustomHandle />}
             />
           </div>
         </div>

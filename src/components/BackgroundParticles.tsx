@@ -3,11 +3,11 @@
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import type { Engine } from "tsparticles-engine"; // ✅ Correct type
+import type { Engine } from "tsparticles-engine"; // ✅ Proper type instead of `any`
 
 export default function BackgroundParticles() {
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine); // ✅ Slim engine for better performance
+    await loadSlim(engine); // ✅ Slim build for performance
   }, []);
 
   return (
@@ -16,7 +16,7 @@ export default function BackgroundParticles() {
       init={particlesInit}
       options={{
         background: {
-          color: "purple",
+          color: "purple", // 🎨 You can customize this to match theme
         },
         particles: {
           number: {
