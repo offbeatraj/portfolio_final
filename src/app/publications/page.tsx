@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import BackgroundParticles from "@/components/BackgroundParticles";

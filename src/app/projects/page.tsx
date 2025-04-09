@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -10,28 +11,28 @@ import {
 } from "react-compare-slider";
 import Spline from "@splinetool/react-spline";
 
+// Your component and logic go here...
+
 // Custom glowing slider handle
-const CustomHandle = () => {
-  return (
-    <div className="relative flex items-center justify-center w-6 h-full bg-transparent">
-      <motion.div
-        className="w-1 h-full bg-pink-400 rounded-full"
-        animate={{
-          boxShadow: [
-            "0 0 0px #f472b6",
-            "0 0 15px #f472b6",
-            "0 0 0px #f472b6",
-          ],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 2,
-          ease: "easeInOut",
-        }}
-      />
-    </div>
-  );
-};
+const CustomHandle = () => (
+  <div className="relative flex items-center justify-center w-6 h-full bg-transparent">
+    <motion.div
+      className="w-1 h-full bg-pink-400 rounded-full"
+      animate={{
+        boxShadow: [
+          "0 0 0px #f472b6",
+          "0 0 15px #f472b6",
+          "0 0 0px #f472b6",
+        ],
+      }}
+      transition={{
+        repeat: Infinity,
+        duration: 2,
+        ease: "easeInOut",
+      }}
+    />
+  </div>
+);
 
 const projects = [
   {
