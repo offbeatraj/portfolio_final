@@ -8,8 +8,8 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/publications", label: "Publications" },
-  { href: "/contact", label: "Contact" }, // ✅ NEW Contact page link
-  { href: "/RAJENDRA_BEHERA_RESUME.pdf", icon: <FileText />, external: true },
+  { href: "/contact", label: "Contact" },
+  { href: "/RAJENDRA_BEHERA_Ψʳ.pdf", icon: <FileText />, external: true },
   { href: "https://github.com/offbeatraj", icon: <Github />, external: true },
   { href: "https://www.linkedin.com/in/rajendra-behera-b8802815b", icon: <Linkedin />, external: true },
 ];
@@ -22,14 +22,25 @@ export default function Navbar() {
       <div className="flex flex-wrap gap-3">
         {links.map((link) =>
           link.icon ? (
-            <Link
-              key={link.href}
-              href={link.href}
-              target={link.external ? "_blank" : "_self"}
-              className="text-white/80 hover:text-white transition"
-            >
-              {link.icon}
-            </Link>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition"
+              >
+                {link.icon}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-white/80 hover:text-white transition"
+              >
+                {link.icon}
+              </Link>
+            )
           ) : (
             <Link
               key={link.href}

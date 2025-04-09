@@ -1,0 +1,139 @@
+.calendar-container {
+    background: linear-gradient(145deg, #1e1e2f, #151522);
+    color: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 380px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 20px rgba(170, 100, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+    animation: fadeInUp 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #aaaaff;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  
+  .calendar-header button {
+    background: transparent;
+    border: none;
+    color: #c2aaff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .calendar-header button:hover {
+    transform: scale(1.2);
+  }
+  
+  .calendar-weekdays,
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: 0.3rem;
+    margin-top: 0.8rem;
+  }
+  
+  .weekday {
+    color: #a0a0c0;
+    font-size: 0.8rem;
+  }
+  
+  .calendar-day {
+    padding: 0.6rem 0;
+    background: #2b2b3d;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .calendar-day:hover {
+    background: #4d4d70;
+    box-shadow: 0 0 10px #9966ff;
+  }
+  
+  .calendar-day.selected {
+    background: #7f4dff;
+    color: #fff;
+    box-shadow: 0 0 15px #bb99ff;
+  }
+  
+  .calendar-day.today {
+    background: #a864ff;
+    border: 2px solid #d1b3ff;
+    font-weight: bold;
+  }
+  
+  .calendar-day.disabled {
+    background: #1c1c2b;
+    color: #777;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .calendar-footer {
+    margin-top: 1.5rem;
+  }
+  
+  .calendar-footer h3 {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  
+  .calendar-footer p {
+    font-size: 0.9rem;
+    color: #ddd;
+  }
+  
+  .glow-button {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #b79eff;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .glow-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    background: #b79eff;
+    box-shadow: 0 0 10px #b79eff;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .glow-button:hover::after {
+    transform: scaleX(1);
+  }
+  .glow-button:hover {
+    color: #e0ccff;
+  }
+  
+  @media (max-width: 400px) {
+    .calendar-container {
+      width: 100%;
+      padding: 1rem;
+    }
+  }

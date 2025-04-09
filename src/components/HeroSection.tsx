@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Briefcase, BookOpen, FileText } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import Spline from "@splinetool/react-spline";
 import Image from "next/image";
 import BackgroundParticles from "./BackgroundParticles";
@@ -153,7 +153,7 @@ export default function HeroSection() {
           </motion.p>
         </div>
 
-        {/* 👤 Profile + Links */}
+        {/* 👤 Profile Image Only */}
         <div className="absolute top-8 right-8 flex flex-col items-center gap-4 pointer-events-auto z-30">
           <motion.div
             className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full overflow-hidden border-[6px] border-white shadow-xl"
@@ -168,15 +168,6 @@ export default function HeroSection() {
               className="object-cover w-full h-full rounded-full"
             />
           </motion.div>
-          <motion.a href="#projects" className="text-white hover:text-purple-400 text-sm">
-            <Briefcase size={16} /> View Projects
-          </motion.a>
-          <motion.a href="/publications" className="text-white hover:text-purple-400 text-sm">
-            <BookOpen size={16} /> Publications
-          </motion.a>
-          <motion.a href="/Rajendra_Behera_Resume.pdf" download className="text-white hover:text-purple-400 text-sm">
-            <FileText size={16} /> Resume
-          </motion.a>
         </div>
       </div>
 
@@ -236,26 +227,6 @@ export default function HeroSection() {
           </div>
         );
       })}
-
-      {/* 🔗 GitHub & LinkedIn */}
-      <div className="absolute bottom-24 right-10 text-white/90 text-sm flex flex-col gap-3 z-40 pointer-events-auto">
-        <motion.a
-          href="https://github.com/offbeatraj"
-          className="flex items-center gap-2 hover:text-purple-400"
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <i className="fa-brands fa-github" /> GitHub
-        </motion.a>
-        <motion.a
-          href="https://linkedin.com/in/rajendra"
-          className="flex items-center gap-2 hover:text-purple-400"
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 3.2, repeat: Infinity }}
-        >
-          <i className="fa-brands fa-linkedin" /> LinkedIn
-        </motion.a>
-      </div>
 
       {/* ⬇️ Scroll Arrow */}
       <motion.div

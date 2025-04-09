@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -12,38 +10,26 @@ import {
 } from "react-compare-slider";
 import Spline from "@splinetool/react-spline";
 
-// Custom Handle without using forwardRef
+// Custom glowing slider handle
 const CustomHandle = () => {
   return (
-    <motion.div
-      style={{
-        position: "relative",
-        width: "5rem",
-        height: "5rem",
-        backgroundImage: "linear-gradient(to bottom, #c084fc, #7a288a)",
-        boxShadow: "0 0 20px rgba(168, 85, 247, 0.9)",
-        borderRadius: "50%",
-      }}
-      animate={{ x: ["0%", "100%", "0%"] }}
-      transition={{
-        repeat: Infinity,
-        repeatType: "loop",
-        duration: 4,
-        ease: "easeInOut",
-      }}
-    >
-      {/* Glowing line */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          bottom: 0,
-          height: "2rem",
-          backgroundImage: "linear-gradient(to right, #ec4899, #facc15)",
-          animation: "pulse 2s infinite",
+    <div className="relative flex items-center justify-center w-6 h-full bg-transparent">
+      <motion.div
+        className="w-1 h-full bg-pink-400 rounded-full"
+        animate={{
+          boxShadow: [
+            "0 0 0px #f472b6",
+            "0 0 15px #f472b6",
+            "0 0 0px #f472b6",
+          ],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
         }}
       />
-    </motion.div>
+    </div>
   );
 };
 
@@ -63,8 +49,8 @@ const projects = [
     image: "/projects/sentiment.jpg",
   },
   {
-    name: "Alzheimer's Chatbot", // No need to escape the apostrophe due to ESLint being disabled
-    desc: "A chatbot designed to assist with Alzheimer's-related queries.", // Same for the description
+    name: "Alzheimer's Chatbot",
+    desc: "A chatbot designed to assist with Alzheimer's-related queries.",
     tech: ["Chatbot", "LLMs", "HuggingFace"],
     github: "https://github.com/offbeatraj/Alzheimers-chatBOT",
     image: "/projects/alzheimers.jpg",
@@ -91,7 +77,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length);
-    }, 6000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -104,18 +90,17 @@ export default function ProjectsPage() {
         <Spline scene="https://prod.spline.design/l0wJDIwD-UO6Fdke/scene.splinecode" />
       </div>
 
-      {/* Wrapper div for layout styles */}
       <div className="relative z-10 px-6 md:px-20 pt-32 pb-20 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
             Crafting Digital Realities
           </h2>
 
-          {/* 🔁 Projects */}
+          {/* 🔁 Project Card */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-10">
             <motion.div
               key={currentProject.name}
@@ -143,9 +128,7 @@ export default function ProjectsPage() {
               <h3 className="text-2xl font-semibold mb-2 text-purple-300">
                 {currentProject.name}
               </h3>
-              <p className="text-white/80 mb-4">
-                {currentProject.desc}
-              </p>
+              <p className="text-white/80 mb-4">{currentProject.desc}</p>
 
               <div className="flex flex-wrap gap-2 mb-4">
                 {currentProject.tech.map((tech, i) => (
@@ -170,7 +153,7 @@ export default function ProjectsPage() {
             </motion.div>
           </div>
 
-          {/* ✨ Code Comparison */}
+          {/* ⚡ Code Comparison */}
           <div className="mt-24">
             <motion.h3
               className="text-3xl font-bold text-center mb-4"
@@ -184,27 +167,23 @@ export default function ProjectsPage() {
               From Chaos to Clarity: Say Goodbye to the Un's
             </p>
 
-            <div className="relative max-w-4xl mx-auto border border-white/10 rounded-xl overflow-hidden backdrop-blur-md shadow-xl p-4 group">
+            <div className="relative max-w-4xl mx-auto">
               <ReactCompareSlider
                 itemOne={
                   <ReactCompareSliderImage
                     src="/projects/code-bad.png"
-                    alt="Bad code"
+                    alt="Others' Code"
                   />
                 }
                 itemTwo={
                   <ReactCompareSliderImage
                     src="/projects/code-good.png"
-                    alt="Clean code"
+                    alt="My Code"
                   />
                 }
-                style={{
-                  width: "100%",
-                  height: "350px",
-                  borderRadius: "1px",
-                  pointerEvents: "all",
-                }}
                 handle={<CustomHandle />}
+                className="rounded-xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-xl"
+                style={{ height: "400px" }}
               />
             </div>
           </div>
